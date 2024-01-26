@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  builder:
+    container_name: portfolio-builder
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: portfolio-builder-img
+    ports:
+      - '3000:3000'
+    volumes:
+      - ..:/var/app
