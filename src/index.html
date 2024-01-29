@@ -74,9 +74,8 @@
         <span id="title" class="display-5" style="">Software Engineer</span>
 
         <div id="social-buttons">
-            <a href="https://www.linkedin.com/in/mvaitiekunas/" target="_blank"><img src="images/linkedin.svg" alt="LinkedIn" /></a>
-            <a href="https://github.com/mindaugasw/" target="_blank"><img src="images/github.svg" alt="GitHub" /></a>
-
+            <a href="{{ linkedInLink }}" target="_blank"><img src="images/linkedin.svg" alt="LinkedIn" /></a>
+            <a href="{{ githubLink }}" target="_blank"><img src="images/github.svg" alt="GitHub" /></a>
                 <img
                     id="social-email-button"
                     src="images/email.svg"
@@ -89,8 +88,8 @@
                     data-bs-html="true"
                     data-bs-content="
                         <div id='social-email-popover-content'>
-                            <a href='mailto:mindaugas932@gmail.com' target='_blank'>mindaugas932@gmail.com</a>
-                            <a id='social-email-copy-button' type='button' class='btn btn-outline-dark'>
+                            <a href='mailto:{{ email }}' target='_blank'>{{ email }}</a>
+                            <a id='social-email-copy-button' type='button' class='btn btn-outline-dark' href='javascript:void(0)' onclick='copyEmail()'>
                                 <i class='fa-regular fa-copy'></i>
                             </a>
                         </div>"
@@ -141,7 +140,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/96bf3e8c85.js" crossorigin="anonymous"></script>
 
-    <script>
+    <script type="text/javascript">
         function initializePopovers() {
             const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
             const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
@@ -153,7 +152,7 @@
             // Source: https://stackoverflow.com/a/71535429/4110469
 
             let triggerElement = document.getElementById('social-email-button');
-            let popover = new bootstrap.Popover(triggerElement, { delay: { show: 0, hide: 500 }});
+            let popover = new bootstrap.Popover(triggerElement, { delay: { show: 0, hide: 500 }, sanitize: false});
             let oldHandler = popover.hide;
 
             triggerElement.addEventListener('shown.bs.popover', function(ev) {
@@ -165,6 +164,56 @@
                     popover.hide();
                 });
             });
+        }
+
+        // Source: https://stackoverflow.com/a/30810322/4110469
+        function copyTextToClipboardFallback(text) {
+            let textArea = document.createElement('textarea');
+            textArea.value = text;
+
+            // Avoid scrolling to bottom
+            textArea.style.top = '0';
+            textArea.style.left = '0';
+            textArea.style.position = 'fixed';
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error('Could not copy text to clipboard (fallback method): ', err, text);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        function copyTextToClipboard(text) {
+            if (!navigator.clipboard) {
+                copyTextToClipboardFallback(text);
+
+                return;
+            }
+
+            navigator.clipboard.writeText(text).then(function () {
+                // Successful copy
+            }, function (err) {
+                console.error('Could not copy text to clipboard: ', err, text);
+            });
+        }
+
+        function copyEmail() {
+            copyTextToClipboard('{{ email }}');
+
+            const buttonElement = document.getElementById('social-email-copy-button');
+            const originalContent = buttonElement.innerHTML;
+            buttonElement.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+            setTimeout(function () {
+                buttonElement.innerHTML = originalContent;
+            }, 2000);
+
         }
 
         initializePopovers();
