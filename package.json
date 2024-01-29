@@ -3,6 +3,7 @@
   "devDependencies": {
     "browser-sync": "^3.0.2",
     "del": "6.*",
+    "fs": "^0.0.1-security",
     "gulp": "^4.0.2",
     "gulp-nunjucks-render": "^2.2.3"
   }

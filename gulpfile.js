@@ -2,6 +2,7 @@ const gulp = require('gulp'),
     nunjucksRender = require('gulp-nunjucks-render'),
     browserSync = require('browser-sync').create(),
     del = require('del'),
+    fs = require('fs'),
     srcDir = './src',
     destDir = './public';
 
@@ -17,12 +18,17 @@ gulp.task('copy-resources', function () {
 gulp.task('update-resources', gulp.series('clean-resources', 'copy-resources'));
 
 gulp.task('build-html', function () {
+    const variablesFileContent = fs.readFileSync('./src/variables.json', 'utf8');
+    const variables = JSON.parse(variablesFileContent);
+
     return gulp.src(srcDir + '/*.html')
         .pipe(nunjucksRender({
             path: srcDir,
             envOptions: {
                 throwOnUndefined: true,
+                noCache: true,
             },
+            data: variables,
         }))
         .pipe(gulp.dest(destDir));
 });
