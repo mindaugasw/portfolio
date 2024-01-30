@@ -3,10 +3,8 @@
 <head>
     <title>Mindaugas Vaitiekūnas - Software Engineer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <style>
         #animation {
@@ -16,23 +14,19 @@
             right: 0;
         }
 
-        @media screen and (min-width: 1670px) {
-            #animation {
-                top: auto;
-                bottom: 0;
-            }
+        .animation-bottom {
+            top: auto;
+            bottom: 0;
         }
 
-        @media screen and (max-width: 1670px) {
-            #animation {
-                top: 0;
-                bottom: auto;
-            }
+        .animation-top {
+            top: 0;
+            bottom: auto;
         }
 
         #headline {
             text-align: center;
-            margin: 25vh auto 0 auto;
+            margin: 25vh 2rem 0 2rem;
         }
 
         #social-buttons img {
@@ -59,14 +53,16 @@
     </style>
 </head>
 <body>
-    <div id="animation">
+    <div id="animation" class="animation-bottom">
         {# Source: https://loading.io/background/m-wave/ #}
 
-        <!-- DESKTOP -->
-        {% include "partials/wave-desktop.html" %}
+        <div class="d-none d-sm-block">
+            {% include "partials/wave-desktop.html" %}
+        </div>
 
-        <!-- MOBILE -->
-        {#% include "partials/wave-mobile.html" %#}
+        <div class="d-sm-none">
+            {% include "partials/wave-mobile.html" %}
+        </div>
     </div>
 
     <div id="headline">
@@ -136,7 +132,6 @@
         my content<br><br><br>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/96bf3e8c85.js" crossorigin="anonymous"></script>
 
@@ -216,8 +211,24 @@
 
         }
 
+        const animationElement = document.getElementById('animation');
+
+        function handleWindowResize(event) {
+            const classNameTop = 'animation-top';
+            const classNameBottom = 'animation-bottom';
+
+            if (window.innerHeight >= animationElement.scrollHeight && animationElement.className !== classNameTop) {
+                animationElement.className = classNameTop;
+            } else if (window.innerHeight < animationElement.scrollHeight && animationElement.className !== classNameBottom) {
+                animationElement.className = classNameBottom;
+            }
+        }
+
+        window.addEventListener('resize', handleWindowResize, true);
+
         initializePopovers();
         holdPopoversOnHover();
+        handleWindowResize();
     </script>
 </body>
 </html>
