@@ -3,3 +3,4 @@ node_modules
 public/*
 !public/.gitkeep
 !public/CNAME
+src/variables.local.json
