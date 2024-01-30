@@ -33,6 +33,21 @@
             margin: 25vh 2rem 0 2rem;
         }
 
+        @media (max-width: 600px) {
+            /*
+             * This is needed to prevent name from breaking into multiple lines on narrow screens.
+             * calc(...) part is Bootstrap default size for display-* classes.
+             * For more techniques to auto-size font see: https://css-tricks.com/fitting-text-to-a-container/
+             */
+            #headline #name {
+                font-size: min(8vw, calc(1.575rem + 3.9vw));
+            }
+
+            #headline #title {
+                font-size: min(6.5vw, calc(1.425rem + 2.1vw));
+            }
+        }
+
         #social-buttons img {
             height: 2.5rem;
             width: 2.5rem;
@@ -105,8 +120,8 @@
     </div>
 
     <div id="headline">
-        <span id="name" class="display-2" style="">Mindaugas Vaitiekūnas</span><br>
-        <span id="title" class="display-5" style="">Software Engineer</span>
+        <span id="name" class="display-2">Mindaugas Vaitiekūnas</span><br>
+        <span id="title" class="display-5">Software Engineer</span>
 
         <div id="social-buttons">
             <a href="{{ linkedInLink }}" target="_blank"><img src="images/linkedin.svg" alt="LinkedIn" /></a>
