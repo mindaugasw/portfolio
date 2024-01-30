@@ -2,7 +2,7 @@
 
 ### Building website
 
-- Start builder container: `docker compose -f builder/docker-compose.yml up --build`
+- Start builder container: `docker compose up --build`
 - Open shell inside the container: `docker exec -it portfolio-builder bash`
 
 Commands inside the container:
