@@ -2,10 +2,11 @@ FROM node:21-bookworm
 
 RUN npm install -g gulp-cli
 
-COPY init.sh var/init.sh
-
 USER node
 
-WORKDIR /var/app
+WORKDIR /home/node/app
 
-CMD /var/init.sh
+# CMD npm install && gulp build
+CMD npm install && tail -f /dev/null
+# Needed to keep container running
+# tail -f /dev/null

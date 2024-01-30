@@ -55,4 +55,4 @@ gulp.task('reload', function () {
     watchFiles();
 });
 
-gulp.task('default', gulp.series('build-html'));
+gulp.task('default', gulp.series('build'));

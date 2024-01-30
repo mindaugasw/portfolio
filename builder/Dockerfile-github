@@ -1,0 +1,7 @@
+FROM node:21-bookworm
+
+RUN echo $GITHUB_WORKSPACE
+
+WORKDIR $GITHUB_WORKSPACE
+
+CMD npm install && gulp build
