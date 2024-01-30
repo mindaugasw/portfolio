@@ -1,0 +1,13 @@
+name: Build GitHub page
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker compose -f builder/docker-compose.yml up --build
