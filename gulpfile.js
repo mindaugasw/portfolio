@@ -18,7 +18,7 @@ gulp.task('copy-resources', function () {
 gulp.task('update-resources', gulp.series('clean-resources', 'copy-resources'));
 
 gulp.task('build-html', function () {
-    const variablesFileContent = fs.readFileSync('./src/variables.example.json', 'utf8');
+    const variablesFileContent = fs.readFileSync('./src/variables.json', 'utf8');
     const variables = JSON.parse(variablesFileContent);
 
     return gulp.src(srcDir + '/*.html')
