@@ -1,275 +1,262 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <title>Mindaugas Vaitiekūnas - Software Engineer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+{% extends "partials/base.html" %}
 
-    <style>
-        body {
-            background-color: #f1f2f3;
+{% block title %}Mindaugas Vaitiekūnas - Software Engineer{% endblock %}
+
+{% block style %}
+<style>
+    #animation {
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        right: 0;
+    }
+
+    .animation-bottom {
+        top: auto;
+        bottom: 0;
+    }
+
+    .animation-top {
+        top: 0;
+        bottom: auto;
+    }
+
+    #headline {
+        text-align: center;
+        margin: 25vh 2rem 0 2rem;
+    }
+
+    @media (max-width: 600px) {
+        /*
+         * This is needed to prevent name from breaking into multiple lines on narrow screens.
+         * calc(...) part is Bootstrap default size for display-* classes.
+         * For more techniques to auto-size font see: https://css-tricks.com/fitting-text-to-a-container/
+         */
+        #headline #name {
+            font-size: min(8vw, calc(1.575rem + 3.9vw));
         }
 
-        #animation {
-            position: absolute;
-            z-index: -1;
-            left: 0;
-            right: 0;
+        #headline #title {
+            font-size: min(6.5vw, calc(1.425rem + 2.1vw));
         }
+    }
 
-        .animation-bottom {
-            top: auto;
-            bottom: 0;
+    #social-buttons img {
+        height: 2.5rem;
+        width: 2.5rem;
+        margin: 1rem 0.5rem;
+        transition: 0.3s;
+    }
+
+    #social-buttons img:hover {
+        opacity: 0.5;
+        transition: 0.3s;
+    }
+
+    .social-email-popover {
+        --bs-popover-body-padding-x: 12px;
+        --bs-popover-body-padding-y: 12px;
+    }
+
+    #social-email-copy-button {
+        padding: 4px 9px;
+        margin-left: 8px;
+    }
+
+    #projects-container {
+        margin: 12rem 2rem 8rem 2rem;
+    }
+
+    @media (min-width: 992px) {
+        #projects-container .container {
+            /* 960px is container max width for LG breakpoint. So we prevent it from getting any bigger on larger breakpoints. */
+            /* But this can't be applied for any size, since it breaks smaller breakpoints. */
+            max-width: 960px;
         }
+    }
 
-        .animation-top {
-            top: 0;
-            bottom: auto;
-        }
+    #projects-container .container > h5 {
+        margin-bottom: 2.5rem;
+    }
 
-        #headline {
-            text-align: center;
-            margin: 25vh 2rem 0 2rem;
-        }
+    #projects-container .card-link {
+        text-decoration: none;
+        color: inherit;
+    }
 
-        @media (max-width: 600px) {
-            /*
-             * This is needed to prevent name from breaking into multiple lines on narrow screens.
-             * calc(...) part is Bootstrap default size for display-* classes.
-             * For more techniques to auto-size font see: https://css-tricks.com/fitting-text-to-a-container/
-             */
-            #headline #name {
-                font-size: min(8vw, calc(1.575rem + 3.9vw));
-            }
+    #projects-container .card {
+        --bs-card-border-radius: 0.6rem;
+        --bs-card-inner-border-radius: 0.6rem;
+        transition: 0.3s;
+    }
 
-            #headline #title {
-                font-size: min(6.5vw, calc(1.425rem + 2.1vw));
-            }
-        }
+    #projects-container .card:hover {
+        transform: scale(1.04);
+        filter: brightness(90%);
+        transition: 0.3s;
+    }
 
-        #social-buttons img {
-            height: 2.5rem;
-            width: 2.5rem;
-            margin: 1rem 0.5rem;
-            transition: 0.3s;
-        }
+    #projects-container .card-container {
+        margin-bottom: 2rem;
+    }
+</style>
+{% endblock %}
 
-        #social-buttons img:hover {
-            opacity: 0.5;
-            transition: 0.3s;
-        }
-
-        .social-email-popover {
-            --bs-popover-body-padding-x: 12px;
-            --bs-popover-body-padding-y: 12px;
-        }
-
-        #social-email-copy-button {
-            padding: 4px 9px;
-            margin-left: 8px;
-        }
-
-        #projects-container {
-            margin: 12rem 2rem 8rem 2rem;
-        }
-
-        @media (min-width: 992px) {
-            #projects-container .container {
-                /* 960px is container max width for LG breakpoint. So we prevent it from getting any bigger on larger breakpoints. */
-                /* But this can't be applied for any size, since it breaks smaller breakpoints. */
-                max-width: 960px;
-            }
-        }
-
-        #projects-container .container > h5 {
-            margin-bottom: 2.5rem;
-        }
-
-        #projects-container .card-link {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        #projects-container .card {
-            --bs-card-border-radius: 0.6rem;
-            --bs-card-inner-border-radius: 0.6rem;
-            transition: 0.3s;
-        }
-
-        #projects-container .card:hover {
-            transform: scale(1.04);
-            filter: brightness(90%);
-            transition: 0.3s;
-        }
-
-        #projects-container .card-container {
-            margin-bottom: 2rem;
-        }
-    </style>
-</head>
-<body>
-    <div id="animation" class="animation-bottom">
-        <div class="d-none d-sm-block">
-            {% include "partials/wave-desktop.html" %}
-        </div>
-
-        <div class="d-sm-none">
-            {% include "partials/wave-mobile.html" %}
-        </div>
+{% block body %}
+<div id="animation" class="animation-bottom">
+    <div class="d-none d-sm-block">
+        {% include "partials/wave-desktop.html" %}
     </div>
 
-    <div id="headline">
-        <span id="name" class="display-2">Mindaugas Vaitiekūnas</span><br>
-        <span id="title" class="display-5">Software Engineer</span>
-
-        <div id="social-buttons">
-            <a href="{{ linkedInLink }}" target="_blank"><img src="images/linkedin.svg" alt="LinkedIn" /></a>
-            <a href="{{ githubLink }}" target="_blank"><img src="images/github.svg" alt="GitHub" /></a>
-                <img
-                    id="social-email-button"
-                    src="images/email.svg"
-                    alt="Email"
-                    data-bs-custom-class="social-email-popover"
-                    data-bs-toggle="popover"
-                    data-bs-trigger="hover focus"
-                    data-bs-placement="bottom"
-                    data-bs-offset="0,15"
-                    data-bs-html="true"
-                    data-bs-content="
-                        <div id='social-email-popover-content'>
-                            <a href='mailto:{{ email }}' target='_blank'>{{ email }}</a>
-                            <a id='social-email-copy-button' type='button' class='btn btn-outline-dark' href='javascript:void(0)' onclick='copyEmail()'>
-                                <i class='fa-regular fa-copy'></i>
-                            </a>
-                        </div>"
-                />
-        </div>
+    <div class="d-sm-none">
+        {% include "partials/wave-mobile.html" %}
     </div>
+</div>
 
-    <div id="projects-container">
-        <div class="container">
-            <h5 class="display-5">Projects</h5>
+<div id="headline">
+    <span id="name" class="display-2">Mindaugas Vaitiekūnas</span><br>
+    <span id="title" class="display-5">Software Engineer</span>
 
-            <div class="row">
-                {% for project in projects %}
-                    <div class="card-container col-12 col-sm-6 col-lg-4">
-                        <a href="{{ project.link }}" class="card-link">
-                            <div class="card h-100">
-                                <img src="images/{{ project.image }}" class="card-img-top" alt="{{ project.imageAlt }}"/>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ project.title }}</h5>
-                                    <p class="card-text">{{ project.description }}</p>
-                                </div>
-                            </div>
-                        </a>
+    <div id="social-buttons">
+        <a href="{{ linkedInLink }}" target="_blank"><img src="images/linkedin.svg" alt="LinkedIn" /></a>
+        <a href="{{ githubLink }}" target="_blank"><img src="images/github.svg" alt="GitHub" /></a>
+        <img
+            id="social-email-button"
+            src="images/email.svg"
+            alt="Email"
+            data-bs-custom-class="social-email-popover"
+            data-bs-toggle="popover"
+            data-bs-trigger="hover focus"
+            data-bs-placement="bottom"
+            data-bs-offset="0,15"
+            data-bs-html="true"
+            data-bs-content="
+                <div id='social-email-popover-content'>
+                    <a href='mailto:{{ email }}' target='_blank'>{{ email }}</a>
+                    <a id='social-email-copy-button' type='button' class='btn btn-outline-dark' href='javascript:void(0)' onclick='copyEmail()'>
+                        <i class='fa-regular fa-copy'></i>
+                    </a>
+                </div>"
+        />
+    </div>
+</div>
+
+<div id="projects-container">
+    <div class="container">
+        <h5 class="display-5">Projects</h5>
+
+        <div class="row">
+            {% for project in projects %}
+            <div class="card-container col-12 col-sm-6 col-lg-4">
+                <a href="{{ project.link }}" class="card-link">
+                    <div class="card h-100">
+                        <img src="images/{{ project.image }}" class="card-img-top" alt="{{ project.imageAlt }}"/>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            <p class="card-text">{{ project.description }}</p>
+                        </div>
                     </div>
-                {% endfor %}
+                </a>
             </div>
+            {% endfor %}
         </div>
     </div>
+</div>
+{% endblock %}
 
-    {% if devEnvironment %}
-        {% include "partials/breakpoint-indicator.html" %}
-    {% endif %}
+{% block script %}
+<script type="text/javascript">
+    function initializePopovers() {
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+    }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/96bf3e8c85.js" crossorigin="anonymous"></script>
+    function holdPopoversOnHover() {
+        // By default, popovers are shown only when trigger element is being hovered.
+        // This script allows to also hover the popover itself.
+        // Source: https://stackoverflow.com/a/71535429/4110469
 
-    <script type="text/javascript">
-        function initializePopovers() {
-            const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-            const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
-        }
+        let triggerElement = document.getElementById('social-email-button');
+        let popover = new bootstrap.Popover(triggerElement, { delay: { show: 0, hide: 500 }, sanitize: false});
+        let oldHandler = popover.hide;
 
-        function holdPopoversOnHover() {
-            // By default, popovers are shown only when trigger element is being hovered.
-            // This script allows to also hover the popover itself.
-            // Source: https://stackoverflow.com/a/71535429/4110469
+        triggerElement.addEventListener('shown.bs.popover', function(ev) {
+            let popoverElement = popover.tip;
 
-            let triggerElement = document.getElementById('social-email-button');
-            let popover = new bootstrap.Popover(triggerElement, { delay: { show: 0, hide: 500 }, sanitize: false});
-            let oldHandler = popover.hide;
-
-            triggerElement.addEventListener('shown.bs.popover', function(ev) {
-                let popoverElement = popover.tip;
-
-                popoverElement.addEventListener('mouseenter', () => popover.hide = () => 1);
-                popoverElement.addEventListener('mouseleave', () => {
-                    popover.hide = oldHandler;
-                    popover.hide();
-                });
+            popoverElement.addEventListener('mouseenter', () => popover.hide = () => 1);
+            popoverElement.addEventListener('mouseleave', () => {
+                popover.hide = oldHandler;
+                popover.hide();
             });
+        });
+    }
+
+    // Source: https://stackoverflow.com/a/30810322/4110469
+    function copyTextToClipboardFallback(text) {
+        let textArea = document.createElement('textarea');
+        textArea.value = text;
+
+        // Avoid scrolling to bottom
+        textArea.style.top = '0';
+        textArea.style.left = '0';
+        textArea.style.position = 'fixed';
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            document.execCommand('copy');
+        } catch (err) {
+            console.error('Could not copy text to clipboard (fallback method): ', err, text);
         }
 
-        // Source: https://stackoverflow.com/a/30810322/4110469
-        function copyTextToClipboardFallback(text) {
-            let textArea = document.createElement('textarea');
-            textArea.value = text;
+        document.body.removeChild(textArea);
+    }
 
-            // Avoid scrolling to bottom
-            textArea.style.top = '0';
-            textArea.style.left = '0';
-            textArea.style.position = 'fixed';
+    function copyTextToClipboard(text) {
+        if (!navigator.clipboard) {
+            copyTextToClipboardFallback(text);
 
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-
-            try {
-                document.execCommand('copy');
-            } catch (err) {
-                console.error('Could not copy text to clipboard (fallback method): ', err, text);
-            }
-
-            document.body.removeChild(textArea);
+            return;
         }
 
-        function copyTextToClipboard(text) {
-            if (!navigator.clipboard) {
-                copyTextToClipboardFallback(text);
+        navigator.clipboard.writeText(text).then(function () {
+            // Successful copy
+        }, function (err) {
+            console.error('Could not copy text to clipboard: ', err, text);
+        });
+    }
 
-                return;
-            }
+    function copyEmail() {
+        copyTextToClipboard('{{ email }}');
 
-            navigator.clipboard.writeText(text).then(function () {
-                // Successful copy
-            }, function (err) {
-                console.error('Could not copy text to clipboard: ', err, text);
-            });
+        const buttonElement = document.getElementById('social-email-copy-button');
+        const originalContent = buttonElement.innerHTML;
+        buttonElement.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+        setTimeout(function () {
+            buttonElement.innerHTML = originalContent;
+        }, 2000);
+    }
+
+    const animationElement = document.getElementById('animation');
+
+    function handleWindowResize(event) {
+        const classNameTop = 'animation-top';
+        const classNameBottom = 'animation-bottom';
+
+        if (window.innerHeight >= animationElement.scrollHeight && animationElement.className !== classNameTop) {
+            animationElement.className = classNameTop;
+        } else if (window.innerHeight < animationElement.scrollHeight && animationElement.className !== classNameBottom) {
+            animationElement.className = classNameBottom;
         }
+    }
 
-        function copyEmail() {
-            copyTextToClipboard('{{ email }}');
+    window.addEventListener('resize', handleWindowResize, true);
 
-            const buttonElement = document.getElementById('social-email-copy-button');
-            const originalContent = buttonElement.innerHTML;
-            buttonElement.innerHTML = '<i class="fa-solid fa-check"></i>';
-
-            setTimeout(function () {
-                buttonElement.innerHTML = originalContent;
-            }, 2000);
-
-        }
-
-        const animationElement = document.getElementById('animation');
-
-        function handleWindowResize(event) {
-            const classNameTop = 'animation-top';
-            const classNameBottom = 'animation-bottom';
-
-            if (window.innerHeight >= animationElement.scrollHeight && animationElement.className !== classNameTop) {
-                animationElement.className = classNameTop;
-            } else if (window.innerHeight < animationElement.scrollHeight && animationElement.className !== classNameBottom) {
-                animationElement.className = classNameBottom;
-            }
-        }
-
-        window.addEventListener('resize', handleWindowResize, true);
-
-        initializePopovers();
-        holdPopoversOnHover();
-        handleWindowResize();
-    </script>
-</body>
-</html>
+    initializePopovers();
+    holdPopoversOnHover();
+    handleWindowResize();
+</script>
+{% endblock %}
