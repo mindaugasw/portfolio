@@ -11,4 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker compose -f builder/docker-compose.yml up --build --exit-code-from builder
+        # run: docker compose -f builder/docker-compose.yml up --build --exit-code-from builder
+        run: docker run $(docker build --quiet --file builder/Dockerfile-github .)
