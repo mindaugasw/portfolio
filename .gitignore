@@ -2,4 +2,3 @@
 node_modules
 public/*
 !public/.gitkeep
-src/variables.json
