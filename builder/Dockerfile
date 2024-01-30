@@ -2,10 +2,10 @@ FROM node:21-bookworm
 
 RUN npm install -g gulp-cli
 
-COPY init.sh var/init.sh
+COPY init.sh /home/node/init.sh
 
 USER node
 
-WORKDIR /var/app
+WORKDIR /home/node/app
 
-CMD /var/init.sh
+CMD /home/node/init.sh
