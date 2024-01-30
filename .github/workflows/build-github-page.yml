@@ -2,7 +2,8 @@ name: Build GitHub page
 
 on:
   push:
-    branches: [ "master" ]
+    # TODO remove test branch
+    branches: [ "master", "pages-test" ]
 
 jobs:
   build:
