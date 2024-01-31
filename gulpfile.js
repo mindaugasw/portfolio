@@ -18,8 +18,12 @@ gulp.task('copy-resources', function () {
 gulp.task('update-resources', gulp.series('clean-resources', 'copy-resources'));
 
 gulp.task('build-html', function () {
-    const variablesFileContent = fs.readFileSync('./src/variables.json', 'utf8');
-    const variables = JSON.parse(variablesFileContent);
+    let variables = JSON.parse(fs.readFileSync('./src/variables.json', 'utf8'));
+    const localVariables = fs.existsSync('./src/variables.local.json')
+        ? JSON.parse(fs.readFileSync('./src/variables.local.json', 'utf8'))
+        : {};
+
+    variables = {...variables, ...localVariables};
 
     return gulp.src(srcDir + '/*.html')
         .pipe(nunjucksRender({
