@@ -2,14 +2,17 @@
     "email": "mindaugas@vaitiekunas.dev",
     "githubLink": "https://github.com/mindaugasw/",
     "linkedInLink": "https://www.linkedin.com/in/mvaitiekunas/",
-    "projects": [
-        {
+    "projects": {
+        "statusbarConverter": {
             "title": "Statusbar Converter",
             "description": "A tool to easily convert Unix timestamp to human-readable time just by copying it.",
             "image": "statusbar-converter-card.png",
             "imageAlt": "Statusbar Converter app screenshot",
-            "link": "statusbar-converter.html"
+            "projectPageLink": "statusbar-converter.html",
+            "projectPage": {
+                "githubLink": "https://github.com/mindaugasw/statusbar-converter"
+            }
         }
-    ],
+    },
     "devEnvironment": false
 }

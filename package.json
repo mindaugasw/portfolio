@@ -6,6 +6,7 @@
     "fs": "^0.0.1-security",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
-    "gulp-nunjucks-render": "^2.2.3"
+    "gulp-nunjucks-render": "^2.2.3",
+    "mergician": "^2.0.0"
   }
 }
