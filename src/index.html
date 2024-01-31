@@ -121,9 +121,9 @@
         <h5 class="display-5">Projects</h5>
 
         <div class="row">
-            {% for project in projects %}
+            {% for projectKey, project in projects %}
             <div class="card-container col-12 col-sm-6 col-lg-4">
-                <a href="{{ project.link }}" class="card-link">
+                <a href="{{ project.projectPageLink }}" class="card-link">
                     <div class="card h-100">
                         <img src="images/{{ project.image }}" class="card-img-top" alt="{{ project.imageAlt }}"/>
                         <div class="card-body">
@@ -217,21 +217,8 @@
 
     const animationElement = document.getElementsByClassName('animation')[0];
 
-    function handleWindowResize(event) {
-        const classNameTop = 'animation-top';
-        const classNameBottom = 'animation-bottom';
-
-        if (window.innerHeight >= animationElement.scrollHeight
-            && !animationElement.classList.contains(classNameTop)
-        ) {
-            animationElement.classList.add(classNameTop);
-            animationElement.classList.remove(classNameBottom);
-        } else if (window.innerHeight < animationElement.scrollHeight
-            && !animationElement.classList.contains(classNameBottom)
-        ) {
-            animationElement.classList.add(classNameBottom);
-            animationElement.classList.remove(classNameTop);
-        }
+    function getAnimationContainerHeight() {
+        return window.innerHeight;
     }
 
     window.addEventListener('resize', handleWindowResize, true);

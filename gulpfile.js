@@ -3,6 +3,7 @@ const gulp = require('gulp'),
     browserSync = require('browser-sync').create(),
     del = require('del'),
     fs = require('fs'),
+    mergician = require('mergician'),
     srcDir = './src',
     destDir = './public';
 
@@ -23,7 +24,7 @@ gulp.task('build-html', function () {
         ? JSON.parse(fs.readFileSync('./src/variables.local.json', 'utf8'))
         : {};
 
-    variables = {...variables, ...localVariables};
+    variables = mergician.mergician(variables, localVariables);
 
     return gulp.src(srcDir + '/*.html')
         .pipe(nunjucksRender({
