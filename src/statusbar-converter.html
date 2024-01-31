@@ -1,0 +1,129 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Statusbar Converter{% endblock %}
+
+{% block style %}
+<style>
+    .animation-container {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 30vh;
+        z-index: -1;
+    }
+
+    .content-container {
+        margin-top: 15vh;
+    }
+
+    @media (max-width: 575px) {
+        .content-container {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    .back-link {
+        margin-bottom: 1em;
+    }
+
+    .content-container h5 {
+        margin-bottom: 0.7em;
+    }
+
+    .content-container .link-buttons {
+        margin-bottom: 1em;
+    }
+
+    .content-container .link-buttons .btn {
+        margin-right: 0.5em;
+        --bs-btn-border-radius: 10em;
+    }
+
+    .content-container p {
+        margin-bottom: 1.5em;
+    }
+
+    video {
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="animation-container">
+    <div class="animation animation-top">
+        <div class="d-block d-xl-none">
+            {% include "partials/wave-blog-narrow.html" %}
+        </div>
+
+        <div class="d-none d-lg-block">
+            {% include "partials/wave-blog-wide.html" %}
+        </div>
+    </div>
+</div>
+
+<div class="content-container">
+    <div class="container">
+        <div class="back-link">
+            <a href="/"><i class="fa-solid fa-caret-left"></i> Back</a>
+        </div>
+
+        <h5 class="display-5">Statusbar Converter</h5>
+
+        <div class="link-buttons">
+            <a href="https://github.com/mindaugasw/statusbar-converter" target="_blank" class="btn btn-outline-dark">
+                <i class="fa-brands fa-github"></i> Source code
+            </a>
+
+            <a href="https://github.com/mindaugasw/statusbar-converter" target="_blank" class="btn btn-outline-dark">
+                <i class="fa-solid fa-download"></i> App download
+            </a>
+        </div>
+
+        <p class="fs-5">
+            A small tool to easily convert Unix timestamp to human-readable time.
+            Using it, you can copy Unix timestamp from anywhere in your computer,
+            and it will automatically show up as human-readable time in the statusbar.
+        </p>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <video autoplay muted loop>
+                    <source src="images/statusbar-converter-video.mp4" type="video/mp4"/>
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    /* TODO DRY */
+    const animationContainerElement = document.getElementsByClassName('animation-container')[0];
+    const animationElement = document.getElementsByClassName('animation')[0];
+
+    function handleWindowResize(event) {
+        const classNameTop = 'animation-top';
+        const classNameBottom = 'animation-bottom';
+
+        if (animationContainerElement.clientHeight >= animationElement.scrollHeight
+            && !animationElement.classList.contains(classNameTop)
+        ) {
+            animationElement.classList.add(classNameTop);
+            animationElement.classList.remove(classNameBottom);
+        } else if (animationContainerElement.clientHeight < animationElement.scrollHeight
+            && !animationElement.classList.contains(classNameBottom)
+        ) {
+            animationElement.classList.add(classNameBottom);
+            animationElement.classList.remove(classNameTop);
+        }
+    }
+
+    window.addEventListener('resize', handleWindowResize, true);
+
+    handleWindowResize();
+</script>
+{% endblock %}

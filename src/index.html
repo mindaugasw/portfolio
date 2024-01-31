@@ -4,23 +4,6 @@
 
 {% block style %}
 <style>
-    #animation {
-        position: absolute;
-        z-index: -1;
-        left: 0;
-        right: 0;
-    }
-
-    .animation-bottom {
-        top: auto;
-        bottom: 0;
-    }
-
-    .animation-top {
-        top: 0;
-        bottom: auto;
-    }
-
     #headline {
         text-align: center;
         margin: 25vh 2rem 0 2rem;
@@ -63,47 +46,39 @@
         margin-left: 8px;
     }
 
-    #projects-container {
-        margin: 12rem 2rem 8rem 2rem;
+    .content-container {
+        margin-top: 12rem;
     }
 
-    @media (min-width: 992px) {
-        #projects-container .container {
-            /* 960px is container max width for LG breakpoint. So we prevent it from getting any bigger on larger breakpoints. */
-            /* But this can't be applied for any size, since it breaks smaller breakpoints. */
-            max-width: 960px;
-        }
-    }
-
-    #projects-container .container > h5 {
+    .content-container .container > h5 {
         margin-bottom: 2.5rem;
     }
 
-    #projects-container .card-link {
+    .content-container .card-link {
         text-decoration: none;
         color: inherit;
     }
 
-    #projects-container .card {
+    .content-container .card {
         --bs-card-border-radius: 0.6rem;
         --bs-card-inner-border-radius: 0.6rem;
         transition: 0.3s;
     }
 
-    #projects-container .card:hover {
+    .content-container .card:hover {
         transform: scale(1.04);
         filter: brightness(90%);
         transition: 0.3s;
     }
 
-    #projects-container .card-container {
+    .content-container .card-container {
         margin-bottom: 2rem;
     }
 </style>
 {% endblock %}
 
 {% block body %}
-<div id="animation" class="animation-bottom">
+<div class="animation animation-bottom">
     <div class="d-none d-sm-block">
         {% include "partials/wave-desktop.html" %}
     </div>
@@ -141,7 +116,7 @@
     </div>
 </div>
 
-<div id="projects-container">
+<div class="content-container">
     <div class="container">
         <h5 class="display-5">Projects</h5>
 
@@ -240,16 +215,22 @@
         }, 2000);
     }
 
-    const animationElement = document.getElementById('animation');
+    const animationElement = document.getElementsByClassName('animation')[0];
 
     function handleWindowResize(event) {
         const classNameTop = 'animation-top';
         const classNameBottom = 'animation-bottom';
 
-        if (window.innerHeight >= animationElement.scrollHeight && animationElement.className !== classNameTop) {
-            animationElement.className = classNameTop;
-        } else if (window.innerHeight < animationElement.scrollHeight && animationElement.className !== classNameBottom) {
-            animationElement.className = classNameBottom;
+        if (window.innerHeight >= animationElement.scrollHeight
+            && !animationElement.classList.contains(classNameTop)
+        ) {
+            animationElement.classList.add(classNameTop);
+            animationElement.classList.remove(classNameBottom);
+        } else if (window.innerHeight < animationElement.scrollHeight
+            && !animationElement.classList.contains(classNameBottom)
+        ) {
+            animationElement.classList.add(classNameBottom);
+            animationElement.classList.remove(classNameTop);
         }
     }
 

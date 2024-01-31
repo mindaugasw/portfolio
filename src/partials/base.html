@@ -10,6 +10,41 @@
         body {
             background-color: #f1f2f3;
         }
+
+        .animation {
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            right: 0;
+        }
+
+        .animation svg {
+            overflow: visible;
+        }
+
+        .animation-bottom {
+            top: auto;
+            bottom: 0;
+        }
+
+        .animation-top {
+            top: 0;
+            bottom: auto;
+        }
+
+        .content-container {
+            margin-left: 2rem;
+            margin-right: 2rem;
+            margin-bottom: 8rem;
+        }
+
+        @media (min-width: 992px) {
+            .content-container .container {
+                /* 960px is container max width for LG breakpoint. So we prevent it from getting any bigger on larger breakpoints. */
+                /* But this can't be applied for any size, since it breaks smaller breakpoints. */
+                max-width: 960px;
+            }
+        }
     </style>
     {% block style %}
     {% endblock %}
