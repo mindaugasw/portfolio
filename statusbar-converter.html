@@ -63,6 +63,7 @@
 
     @media (max-width: 575px) {
         .content-container {
+            /* On XS breakpoint larger margins cause link buttons to break into 2 lines */
             margin-left: 0.5rem;
             margin-right: 0.5rem;
         }
@@ -72,24 +73,24 @@
         margin-bottom: 1em;
     }
 
+    .back-link a, .paragraph a {
+        color: inherit;
+    }
+
     .content-container h5 {
         margin-bottom: 0.7em;
     }
 
-    .content-container .link-buttons {
-        margin-bottom: 1em;
-    }
-
-    .content-container .link-buttons .btn {
+    .link-buttons .btn {
         margin-right: 0.5em;
         --bs-btn-border-radius: 10em;
     }
 
-    .content-container p {
+    .paragraph {
         margin-bottom: 1.5em;
     }
 
-    video {
+    video, .row img {
         width: 100%;
     }
 </style>
@@ -153,27 +154,37 @@
 
         <h5 class="display-5">Statusbar Converter</h5>
 
-        <div class="link-buttons">
+        <div class="paragraph link-buttons">
             <a href="https://github.com/mindaugasw/statusbar-converter" target="_blank" class="btn btn-outline-dark">
                 <i class="fa-brands fa-github"></i> Source code
             </a>
 
-            <a href="https://github.com/mindaugasw/statusbar-converter" target="_blank" class="btn btn-outline-dark">
+            <a href="https://github.com/mindaugasw/statusbar-converter/releases" target="_blank" class="btn btn-outline-dark">
                 <i class="fa-solid fa-download"></i> App download
             </a>
         </div>
 
-        <p class="fs-5">
+        <p class="paragraph fs-5">
             A small tool to easily convert Unix timestamp to human-readable time.
             Using it, you can copy Unix timestamp from anywhere in your computer,
             and it will automatically show up as human-readable time in the statusbar.
         </p>
 
-        <div class="row justify-content-center">
+        <p class="paragraph fs-5">
+            App is built with Python, available for Linux and macOS.
+        </p>
+
+        <div class="paragraph row justify-content-center">
             <div class="col-12 col-lg-10">
                 <video autoplay muted loop>
                     <source src="images/statusbar-converter-video.mp4" type="video/mp4"/>
                 </video>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-9 col-md-7 col-lg-6">
+                <img src="images/statusbar-converter-full.png" alt="Statusbar Converter app screenshot"/>
             </div>
         </div>
     </div>
@@ -185,27 +196,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/96bf3e8c85.js" crossorigin="anonymous"></script>
 
+    <script>
+        function handleWindowResize(event) {
+            const classNameTop = 'animation-top';
+            const classNameBottom = 'animation-bottom';
+
+            if (
+                getAnimationContainerHeight() >= animationElement.scrollHeight
+                && !animationElement.classList.contains(classNameTop)
+            ) {
+                animationElement.classList.add(classNameTop);
+                animationElement.classList.remove(classNameBottom);
+            } else if (
+                getAnimationContainerHeight() < animationElement.scrollHeight
+                && !animationElement.classList.contains(classNameBottom)
+            ) {
+                animationElement.classList.add(classNameBottom);
+                animationElement.classList.remove(classNameTop);
+            }
+        }
+    </script>
+
     
 <script>
-    /* TODO DRY */
     const animationContainerElement = document.getElementsByClassName('animation-container')[0];
     const animationElement = document.getElementsByClassName('animation')[0];
 
-    function handleWindowResize(event) {
-        const classNameTop = 'animation-top';
-        const classNameBottom = 'animation-bottom';
-
-        if (animationContainerElement.clientHeight >= animationElement.scrollHeight
-            && !animationElement.classList.contains(classNameTop)
-        ) {
-            animationElement.classList.add(classNameTop);
-            animationElement.classList.remove(classNameBottom);
-        } else if (animationContainerElement.clientHeight < animationElement.scrollHeight
-            && !animationElement.classList.contains(classNameBottom)
-        ) {
-            animationElement.classList.add(classNameBottom);
-            animationElement.classList.remove(classNameTop);
-        }
+    function getAnimationContainerHeight() {
+        return animationContainerElement.clientHeight;
     }
 
     window.addEventListener('resize', handleWindowResize, true);
