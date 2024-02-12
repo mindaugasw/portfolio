@@ -80,11 +80,11 @@
 {% block body %}
 <div class="animation animation-bottom">
     <div class="d-none d-sm-block">
-        {% include "partials/wave-desktop.html" %}
+        {% include "partials/wave-index-wide.html" %}
     </div>
 
     <div class="d-sm-none">
-        {% include "partials/wave-mobile.html" %}
+        {% include "partials/wave-index-narrow.html" %}
     </div>
 </div>
 
@@ -125,7 +125,11 @@
             <div class="card-container col-12 col-sm-6 col-lg-4">
                 <a href="{{ project.projectPageLink }}" class="card-link">
                     <div class="card h-100">
-                        <img src="images/{{ project.image }}" class="card-img-top" alt="{{ project.imageAlt }}"/>
+                        <img
+                            src="images/{{ project.imagesDir }}/{{ project.cardImage }}"
+                            class="card-img-top"
+                            alt="{{ project.cardImageAlt }}"
+                        />
                         <div class="card-body">
                             <h5 class="card-title">{{ project.title }}</h5>
                             <p class="card-text">{{ project.description }}</p>
