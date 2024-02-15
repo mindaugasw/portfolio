@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Statusbar Converter - Mindaugas Vaitiekūnas</title>
+    <title>Stock Sentiment Tracker - Mindaugas Vaitiekūnas</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Statusbar Converter">
-    <meta name="og:description" content="A tool to easily convert Unix timestamp to human-readable time just by copying it.">
+    <meta property="og:title" content="Stock Sentiment Tracker">
+    <meta name="og:description" content="Automated stock market sentiment analysis.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vaitiekunas.dev/statusbar-converter.html">
-    <meta property="og:image" content="https://vaitiekunas.dev/images/statusbar-converter/og-image.png">
+    <meta property="og:url" content="https://vaitiekunas.dev/stock-sentiment-tracker.html">
+    <meta property="og:image" content="https://vaitiekunas.dev/images/stock-sentiment-tracker/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
@@ -119,10 +119,13 @@
 </style>
 
 <style>
-    .link-buttons .btn {
-        margin-right: 0.5em;
-        margin-bottom: 1.5em;
-        --bs-btn-border-radius: 10em;
+    .technology-list > div {
+        display: table-cell;
+    }
+
+    .technology-list > div > span {
+        display: inline-block;
+        margin-left: 1rem;
     }
 </style>
 
@@ -183,43 +186,110 @@
             <a href="/"><i class="fa-solid fa-caret-left"></i> Back</a>
         </div>
 
-        <h5 class="display-5">Statusbar Converter</h5>
+        <h5 class="display-5">Stock Sentiment Tracker</h5>
 
         
-<!-- TODO indentation -->
-        <div class="link-buttons">
-            <a href="https://github.com/mindaugasw/statusbar-converter" target="_blank" class="btn btn-outline-dark">
-                <i class="fa-brands fa-github"></i> Source code
-            </a>
+<div class="paragraph">
+    This application automatically tracks and analyses discussions on social networks to calculate market sentiment about specific stocks.
+</div>
 
-            <a href="https://github.com/mindaugasw/statusbar-converter/releases" target="_blank" class="btn btn-outline-dark">
-                <i class="fa-solid fa-download"></i> App download
-            </a>
+<div class="paragraph">
+    The need for such project arose after
+    <a href="https://en.wikipedia.org/wiki/GameStop_short_squeeze" target="_blank">GameStop short squeeze</a>
+    in 2021, when Reddit caused the stock price to skyrocket, rising nearly 30 times during 1 month.
+
+    After the Gamestop story,
+    <a href="https://en.wikipedia.org/wiki/GameStop_short_squeeze#:~:text=Selected%20stocks%20experiencing%20sharp%20price%20increases" target="_blank">many other stocks</a>
+    also experienced similar sharp increases, creating many profit opportunities from the so-called "meme stocks".
+</div>
+
+<div class="paragraph">
+    Thus, this tool was created to automate social network monitoring and comment analysis.
+    The goal of this tool is to alert the user of potential new meme stocks, which may create investment opportunities.
+    All without having the user to read discussions themselves, which can be quite time-consuming, and instead having aggregated statistics through this app.
+</div>
+
+<div class="paragraph row justify-content-center">
+    <img src="images/stock-sentiment-tracker/homepage.png" alt="Application homepage screenshot">
+
+    <div class="picture-caption">
+        App homepage lists most popular stocks, along with their mentions count, stock price, and their change over last 24 hours.
+    </div>
+</div>
+
+<div class="paragraph">
+    The app is built as a web system.
+    It works by analysing Reddit comments live-stream 24/7 in the background, looking for keywords related to specific stocks.
+    For example, the following comment would be counted as 1 mention of Tesla stock:
+</div>
+
+<div class="paragraph row justify-content-center">
+    <div class="col-xs-12 col-sm-11 col-md-9 col-lg-7">
+        <img src="images/stock-sentiment-tracker/comment-example.png" alt="Example Reddit comment, that would be counted as 1 mention for the stock">
+    </div>
+</div>
+
+<div class="paragraph">
+    The app provides a web interface to view aggregated data. You can view the most popular stock list,
+    as well as detailed data for each company/stock. E.g. its price history, mentions history, related news articles, and all comments that were counted as mentions.
+    You can also view Price vs Mentions graph, to see if there's any correlation between price and mentions change:
+</div>
+
+<div class="paragraph row justify-content-center">
+    <img src="images/stock-sentiment-tracker/card.png" alt="Single company page screenshot">
+</div>
+
+<div class="paragraph">
+    Technology stack:
+    <div class="technology-list">
+        <div>Backend:</div>
+        <div>
+            <span><i class="fa-custom fa-php"></i> PHP</span>
+            <span><i class="fa-brands fa-symfony"></i> Symfony</span>
+            <span><i class="fa-custom fa-doctrine"></i> Doctrine</span>
+            <span><i class="fa-solid fa-database"></i> MySQL</span>
+            <span><i class="fa-custom fa-elasticsearch"></i> Elasticsearch</span>
         </div>
+    </div>
 
-        <p class="paragraph">
-            A small tool to easily convert Unix timestamp to human-readable time.
-            Using it, you can copy Unix timestamp from anywhere in your computer,
-            and it will automatically show up as human-readable time in the statusbar.
-        </p>
-
-        <p class="paragraph">
-            App is built with Python and is available for Linux and macOS.
-        </p>
-
-        <div class="paragraph row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <video autoplay muted loop>
-                    <source src="images/statusbar-converter/demo-video.mp4" type="video/mp4"/>
-                </video>
-            </div>
+    <div class="technology-list">
+        <div>Frontend:</div>
+        <div>
+            <span><i class="fa-brands fa-react"></i> React</span>
+            <span><i class="fa-brands fa-bootstrap"></i> Bootstrap</span>
+            <span><i class="fa-custom fa-webpack"></i> Webpack</span>
+            <span><i class="fa-custom fa-kibana"></i> Kibana</span>
         </div>
+    </div>
 
-        <div class="row justify-content-center">
-            <div class="col-11 col-sm-9 col-md-7 col-lg-6">
-                <img src="images/statusbar-converter/full-screenshot.png" alt="Statusbar Converter app screenshot"/>
-            </div>
+    <div class="technology-list">
+        <div>Other:</div>
+        <div>
+            <span><i class="fa-brands fa-docker"></i> Docker</span>
+            <span><i class="fa-custom fa-fluentbit"></i> FluentBit</span>
+            <span><i class="fa-custom fa-seq"></i> SEQ</span>
         </div>
+    </div>
+</div>
+
+<div class="paragraph">
+    Sentiment data is sourced from multiple subreddits
+    (<a href="https://www.reddit.com/r/wallstreetbets/" target="_blank">r/wallstreebets</a>,
+    <a href="https://www.reddit.com/r/wallstreetbetsOGs/" target="_blank">r/wallstreetbetsOGs</a>,
+    <a href="https://www.reddit.com/r/Superstonk/" target="_blank">r/Superstonk</a>,
+    <a href="https://www.reddit.com/r/stockmarket/" target="_blank">r/stockmarket</a>),
+    in which discussions about meme stocks are most active.
+    Financial data is sourced from Tiingo API and Google Finance/Google Sheets.
+</div>
+
+<div class="paragraph">
+    Key takeaways:
+    <ul>
+        <li>The statistics shown on the app (e.g. increased popularity for a specific stock) would match with how it looks like when following the discussion myself and reading the comments. So the stock popularity algorithm was working overall.</li>
+        <li>Automated analysis of social network comments is incredibly difficult. It required constant work to tweak the algorithm to combat new spam methods, to keep up with the slang, etc.</li>
+        <li>There were cases where it could be seen strong correlation between sudden price change and increased discussions on Reddit about that specific stock. However, very rarely would discussions precede price change. So the system was useful overall as a tool to more easily keep up with stock market news, but was difficult to use for the intended goal of receiving alerts about investment opportunities into meme stocks.</li>
+    </ul>
+</div>
 
     </div>
 </div>
@@ -252,6 +322,7 @@
     </script>
 
     
+
 <script>
     const animationContainerElement = document.getElementsByClassName('animation-container')[0];
     const animationElement = document.getElementsByClassName('animation')[0];
@@ -264,6 +335,8 @@
 
     handleWindowResize();
 </script>
+
+<script src="scripts/fontAwesomeCustomIcons.js"></script>
 
 </body>
 </html>
