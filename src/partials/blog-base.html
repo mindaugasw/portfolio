@@ -1,6 +1,10 @@
 {% extends "partials/base.html" %}
 
 {% block title %}{{ project.title }} - Mindaugas Vaitiekūnas{% endblock %}
+{% block ogTitle %}{{ project.title }}{% endblock %}
+{% block ogDescription %}{{ project.description }}{% endblock %}
+{% block ogUrl %}/{{ project.projectPageLink }}{% endblock %}
+{% block ogImage %}{{ project.imagesDir }}/og-image.png{% endblock %}
 
 {% block style %}
 <style>

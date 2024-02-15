@@ -1,6 +1,11 @@
 {% extends "partials/base.html" %}
 
-{% block title %}Mindaugas Vaitiekūnas - Software Engineer{% endblock %}
+{% set title = 'Mindaugas Vaitiekūnas - Software Engineer' %}
+{% block title %}{{ title }}{% endblock %}
+{% block ogTitle %}{{ title }}{% endblock %}
+{% block ogDescription %}{% endblock %}
+{% block ogUrl %}{% endblock %}
+{% block ogImage %}og-image-index.png{% endblock %}
 
 {% block style %}
 <style>

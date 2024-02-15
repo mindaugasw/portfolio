@@ -25,5 +25,6 @@
             }
         }
     },
+    "websiteHost": "https://vaitiekunas.dev",
     "devEnvironment": false
 }
