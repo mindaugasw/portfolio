@@ -5,7 +5,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="{% block ogTitle %}{% endblock %}">
-    <meta name="og:description" content="{% block ogDescription %}{% endblock %}">
+    <meta property="description" content="{% block description %}{% endblock %}">
+    <meta property="og:description" content="{% block ogDescription %}{% endblock %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ websiteHost }}{% block ogUrl %}{% endblock %}">
     <meta property="og:image" content="{{ websiteHost }}/images/{% block ogImage %}{% endblock %}">
