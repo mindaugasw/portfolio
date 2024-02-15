@@ -1,82 +1,22 @@
-{% extends "partials/base.html" %}
+{% extends "partials/blog-base.html" %}
 
 {% set project = projects.statusbarConverter %}
 {% set projectPage = project.projectPage %}
 
-{% block title %}{{ project.title }}{% endblock %}
-
 {% block style %}
+{{ super() }}
 <style>
-    .animation-container {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        height: 30vh;
-        z-index: -1;
-    }
-
-    .content-container {
-        margin-top: 15vh;
-    }
-
-    @media (max-width: 575px) {
-        .content-container {
-            /* On XS breakpoint larger margins cause link buttons to break into 2 lines */
-            margin-left: 0.5rem;
-            margin-right: 0.5rem;
-        }
-    }
-
-    .back-link {
-        margin-bottom: 1em;
-    }
-
-    .back-link a, .paragraph a {
-        color: inherit;
-    }
-
-    .content-container h5 {
-        margin-bottom: 0.7em;
-    }
-
     .link-buttons .btn {
         margin-right: 0.5em;
-        --bs-btn-border-radius: 10em;
-    }
-
-    .paragraph {
         margin-bottom: 1.5em;
-    }
-
-    video, .row img {
-        width: 100%;
+        --bs-btn-border-radius: 10em;
     }
 </style>
 {% endblock %}
 
-{% block body %}
-<div class="animation-container">
-    <div class="animation animation-top">
-        <div class="d-block d-xl-none">
-            {% include "partials/wave-blog-narrow.html" %}
-        </div>
-
-        <div class="d-none d-lg-block">
-            {% include "partials/wave-blog-wide.html" %}
-        </div>
-    </div>
-</div>
-
-<div class="content-container">
-    <div class="container">
-        <div class="back-link">
-            <a href="/"><i class="fa-solid fa-caret-left"></i> Back</a>
-        </div>
-
-        <h5 class="display-5">{{ project.title }}</h5>
-
-        <div class="paragraph link-buttons">
+{% block blogBody %}
+<!-- TODO indentation -->
+        <div class="link-buttons">
             <a href="{{ projectPage.githubLink }}" target="_blank" class="btn btn-outline-dark">
                 <i class="fa-brands fa-github"></i> Source code
             </a>
@@ -86,13 +26,13 @@
             </a>
         </div>
 
-        <p class="paragraph fs-5">
+        <p class="paragraph">
             A small tool to easily convert Unix timestamp to human-readable time.
             Using it, you can copy Unix timestamp from anywhere in your computer,
             and it will automatically show up as human-readable time in the statusbar.
         </p>
 
-        <p class="paragraph fs-5">
+        <p class="paragraph">
             App is built with Python and is available for Linux and macOS.
         </p>
 
@@ -109,21 +49,4 @@
                 <img src="images/{{ project.imagesDir }}/full-screenshot.png" alt="Statusbar Converter app screenshot"/>
             </div>
         </div>
-    </div>
-</div>
-{% endblock %}
-
-{% block script %}
-<script>
-    const animationContainerElement = document.getElementsByClassName('animation-container')[0];
-    const animationElement = document.getElementsByClassName('animation')[0];
-
-    function getAnimationContainerHeight() {
-        return animationContainerElement.clientHeight;
-    }
-
-    window.addEventListener('resize', handleWindowResize, true);
-
-    handleWindowResize();
-</script>
 {% endblock %}

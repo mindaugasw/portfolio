@@ -4,6 +4,15 @@
     "linkedInLink": "https://www.linkedin.com/in/mvaitiekunas/",
     "googleAnalyticsTagId": "G-42C49NLNBX",
     "projects": {
+        "stockSentimentTrack": {
+            "title": "Stock Sentiment Tracker",
+            "description": "Automated stock market sentiment analysis.",
+            "imagesDir": "stock-sentiment-tracker",
+            "cardImage": "card.png",
+            "cardImageAlt": "Stock Sentiment Tracker app screenshot",
+            "projectPageLink": "stock-sentiment-tracker.html",
+            "projectPage": {}
+        },
         "statusbarConverter": {
             "title": "Statusbar Converter",
             "description": "A tool to easily convert Unix timestamp to human-readable time just by copying it.",

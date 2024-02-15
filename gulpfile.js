@@ -8,10 +8,15 @@ const gulp = require('gulp'),
     destDir = './public';
 
 gulp.task('clean-resources', function () {
+    del(destDir + '/scripts');
+
     return del(destDir + '/images');
 });
 
 gulp.task('copy-resources', function () {
+    gulp.src(srcDir + '/scripts/**')
+        .pipe(gulp.dest(destDir + '/scripts'));
+
     return gulp.src(srcDir + '/images/**')
         .pipe(gulp.dest(destDir + '/images'));
 });
@@ -40,14 +45,14 @@ gulp.task('build-html', function () {
 
 gulp.task('build', gulp.series('update-resources', 'build-html'));
 
-function watchFiles() {
-    gulp.watch(srcDir + '/images/**', gulp.series('update-resources'));
+gulp.task('watch', function () {
+    gulp.watch([srcDir + '/scripts/**', srcDir + '/images/**'], gulp.series('update-resources'));
     gulp.watch(srcDir + '/**/*.html', gulp.series('build-html'));
-}
-
-gulp.task('watch', watchFiles);
+});
 
 gulp.task('reload', function () {
+    gulp.series('build')();
+
     browserSync.init({
         server: {
             baseDir: destDir,
@@ -56,8 +61,7 @@ gulp.task('reload', function () {
     });
 
     gulp.watch(destDir).on('change', browserSync.reload);
-
-    watchFiles();
+    gulp.series('watch')();
 });
 
 gulp.task('default', gulp.series('build'));
