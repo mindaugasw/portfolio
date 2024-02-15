@@ -2,17 +2,29 @@
     "email": "mindaugas@vaitiekunas.dev",
     "githubLink": "https://github.com/mindaugasw/",
     "linkedInLink": "https://www.linkedin.com/in/mvaitiekunas/",
+    "googleAnalyticsTagId": "G-42C49NLNBX",
     "projects": {
+        "stockSentimentTrack": {
+            "title": "Stock Sentiment Tracker",
+            "description": "Automated stock market sentiment analysis.",
+            "imagesDir": "stock-sentiment-tracker",
+            "cardImage": "card.png",
+            "cardImageAlt": "Stock Sentiment Tracker app screenshot",
+            "projectPageLink": "stock-sentiment-tracker.html",
+            "projectPage": {}
+        },
         "statusbarConverter": {
             "title": "Statusbar Converter",
             "description": "A tool to easily convert Unix timestamp to human-readable time just by copying it.",
-            "image": "statusbar-converter-card.png",
-            "imageAlt": "Statusbar Converter app screenshot",
+            "imagesDir": "statusbar-converter",
+            "cardImage": "card.png",
+            "cardImageAlt": "Statusbar Converter app screenshot",
             "projectPageLink": "statusbar-converter.html",
             "projectPage": {
                 "githubLink": "https://github.com/mindaugasw/statusbar-converter"
             }
         }
     },
+    "websiteHost": "https://vaitiekunas.dev",
     "devEnvironment": false
 }

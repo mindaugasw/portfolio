@@ -1,0 +1,101 @@
+{% extends "partials/base.html" %}
+
+{% block title %}{{ project.title }} - Mindaugas Vaitiekūnas{% endblock %}
+{% block ogTitle %}{{ project.title }}{% endblock %}
+{% block ogDescription %}{{ project.description }}{% endblock %}
+{% block ogUrl %}/{{ project.projectPageLink }}{% endblock %}
+{% block ogImage %}{{ project.imagesDir }}/og-image.png{% endblock %}
+
+{% block style %}
+<style>
+    .animation-container {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 30vh;
+        z-index: -1;
+    }
+
+    .content-container {
+        margin-top: 15vh;
+    }
+
+    @media (max-width: 575px) {
+        .content-container {
+            /* On XS breakpoint larger margins cause link buttons to break into 2 lines */
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    .back-link {
+        margin-bottom: 1em;
+    }
+
+    .back-link a, .paragraph a {
+        color: inherit;
+    }
+
+    .content-container h5 {
+        margin-bottom: 0.7em;
+    }
+
+    .paragraph {
+        margin-bottom: 1.5em;
+        font-size: 1.12rem;
+    }
+
+    video, .row img {
+        width: 100%;
+    }
+
+    .picture-caption {
+        font-size: 1.05rem;
+        font-style: italic;
+        text-align: center;
+        margin-top: 0.5em;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="animation-container">
+    <div class="animation animation-top">
+        <div class="d-block d-xl-none">
+            {% include "partials/wave-blog-narrow.html" %}
+        </div>
+
+        <div class="d-none d-lg-block">
+            {% include "partials/wave-blog-wide.html" %}
+        </div>
+    </div>
+</div>
+
+<div class="content-container">
+    <div class="container">
+        <div class="back-link">
+            <a href="/"><i class="fa-solid fa-caret-left"></i> Back</a>
+        </div>
+
+        <h5 class="display-5">{{ project.title }}</h5>
+
+        {% block blogBody %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    const animationContainerElement = document.getElementsByClassName('animation-container')[0];
+    const animationElement = document.getElementsByClassName('animation')[0];
+
+    function getAnimationContainerHeight() {
+        return animationContainerElement.clientHeight;
+    }
+
+    window.addEventListener('resize', handleWindowResize, true);
+
+    handleWindowResize();
+</script>
+{% endblock %}

@@ -1,10 +1,12 @@
 <div class='breakpoint-indicator'>
-    <div class="d-block d-sm-none">XS</div>
-    <div class="d-none d-sm-block d-md-none">SM</div>
-    <div class="d-none d-md-block d-lg-none">MD</div>
-    <div class="d-none d-lg-block d-xl-none">LG</div>
-    <div class="d-none d-xl-block d-xxl-none">XL</div>
-    <div class="d-none d-xxl-block">XXL</div>
+    <a id="bootstrap-docs-link" href="#" target="_blank">
+        <div class="d-block d-sm-none">XS</div>
+        <div class="d-none d-sm-block d-md-none">SM</div>
+        <div class="d-none d-md-block d-lg-none">MD</div>
+        <div class="d-none d-lg-block d-xl-none">LG</div>
+        <div class="d-none d-xl-block d-xxl-none">XL</div>
+        <div class="d-none d-xxl-block">XXL</div>
+    </a>
 </div>
 
 <style>
@@ -13,6 +15,11 @@
         bottom: 15px;
         left: 20px;
         z-index: 10000;
+    }
+
+    #bootstrap-docs-link {
+        text-decoration: none;
+        color: initial;
     }
 
     .breakpoint-indicator div {
@@ -44,3 +51,13 @@
         background: #e38bee;
     }
 </style>
+
+<script>
+    window.addEventListener('load', function() {
+        const bootstrapVersion = bootstrap.Tooltip.VERSION;
+        const versionParts = bootstrapVersion.split('.');
+        const minorVersion = `${versionParts[0]}.${versionParts[1]}`;
+
+        document.getElementById('bootstrap-docs-link').href = `https://getbootstrap.com/docs/${minorVersion}`;
+    });
+</script>
